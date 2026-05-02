@@ -27,8 +27,10 @@ app.use(cookieParser());
 // routes
 
 const healthcheckRouter = require("./routes/healthcheck.route");
+const authRouter = require("./routes/auth.route.js");
 
 app.use("/api/v1/healthcheck", healthcheckRouter);
+app.use("/api/auth/", authRouter)
 
 
 
