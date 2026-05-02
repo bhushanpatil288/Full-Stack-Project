@@ -1,10 +1,11 @@
-import { Header } from "."; 
+import { Header, Footer } from ".";
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Header />
       {children}
+      <Footer />
     </>
   )
 }

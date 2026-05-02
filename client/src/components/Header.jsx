@@ -25,7 +25,7 @@ const Header = () => {
             <div className="absolute w-2 h-2 bg-neon-magenta rounded-full shadow-[0_0_8px_rgba(188,19,254,1)]"></div>
           </div>
           <span className="font-futuristic text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-magenta drop-shadow-[0_0_8px_rgba(0,243,255,0.4)]">
-            NEXUS
+            AuthSystem
           </span>
         </div>
 
@@ -37,10 +37,9 @@ const Header = () => {
                 <NavLink
                   to={item.path}
                   className={({ isActive }) =>
-                    `relative font-futuristic text-sm tracking-[0.2em] uppercase transition-all duration-300 py-2 group ${
-                      isActive
-                        ? "text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]"
-                        : "text-gray-400 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                    `relative font-futuristic text-sm tracking-[0.2em] uppercase transition-all duration-300 py-2 group ${isActive
+                      ? "text-neon-cyan drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]"
+                      : "text-gray-400 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
                     }`
                   }
                 >
