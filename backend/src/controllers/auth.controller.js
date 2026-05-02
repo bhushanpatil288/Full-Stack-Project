@@ -4,7 +4,7 @@ const { ApiResponse } = require("../utils/ApiResponse");
 const asyncHandler = require("../utils/asyncHandler");
 
 const registerController = asyncHandler(async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password } = req.body;
   if ([name, email, password].some(field => !field || field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
@@ -30,8 +30,6 @@ const registerController = asyncHandler(async (req, res) => {
     sameSite: "strict", // CSRF protection
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   });
-
-  console.log(token)
 
   const createdUser = await userModel.findById(user._id).select(
     "-password"

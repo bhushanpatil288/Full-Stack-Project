@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ApiError } = require("../utils/ApiError");
 const env_config = require("../config/env");
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
   console.log(env_config.NODE_ENV)
   let error = err;
 
