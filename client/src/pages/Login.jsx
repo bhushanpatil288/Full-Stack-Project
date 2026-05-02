@@ -45,7 +45,7 @@ const Login = () => {
                                 Authenticate <i className="ri-arrow-right-line transition-transform duration-300 group-hover/btn:translate-x-1"></i>
                             </span>
                         </button>
-                        <p className="text-center mt-4 text-gray-500">don't have and account ? <Link className="text-blue-500 hover:text-neon-magenta" to="/register">Register</Link></p>
+                        <p className="text-center mt-4 text-gray-500">don&apos;t have and account ? <Link className="text-blue-500 hover:text-neon-magenta" to="/register">Register</Link></p>
                     </div>
                 </form>
             </div>
