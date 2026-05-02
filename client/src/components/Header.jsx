@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const navItems = [
   {
@@ -14,11 +15,12 @@ const navItems = [
 ]
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-void/80 backdrop-blur-lg border-b border-neon-cyan/30 shadow-[0_0_15px_rgba(0,243,255,0.15)]">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo Section */}
-        <div className="flex items-center gap-3 group cursor-pointer">
+        <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate("/")}>
           <div className="w-8 h-8 relative flex items-center justify-center">
             <div className="absolute inset-0 bg-neon-cyan opacity-20 blur-md rounded-full group-hover:opacity-60 transition-opacity duration-500"></div>
             <div className="relative w-6 h-6 border-2 border-neon-cyan rounded-sm transform rotate-45 group-hover:rotate-180 transition-transform duration-700"></div>
@@ -65,7 +67,7 @@ const Header = () => {
           <button className="relative px-6 py-2 font-futuristic text-xs tracking-widest text-neon-cyan uppercase overflow-hidden group cursor-pointer">
             <div className="absolute inset-0 border border-neon-cyan/50 group-hover:border-neon-cyan transition-colors duration-300 skew-x-[-20deg]"></div>
             <div className="absolute inset-0 bg-neon-cyan/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out skew-x-[-20deg]"></div>
-            <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]">System_Login</span>
+            <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" onClick={() => navigate("/login")}>System_Login</span>
           </button>
         </div>
       </nav>

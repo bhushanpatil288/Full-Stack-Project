@@ -1,7 +1,7 @@
 const Home = () => {
   return (
     <div>
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="flex items-center justify-center h-[calc(100vh-148px)]">
         <div className="text-center">
           <h1 className="text-6xl font-bold mb-6">
             <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-blue-500">
