@@ -1,1 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --color-neon-cyan: #00f3ff;
+  --color-neon-magenta: #bc13fe;
+  --color-void: #0a0a0f;
+  --color-surface: #151520;
+  --font-futuristic: 'Orbitron', sans-serif;
+}
