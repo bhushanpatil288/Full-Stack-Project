@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { register } from "../api/api"
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -12,9 +13,14 @@ const Register = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData)
+		try {
+			const res = await register(formData);
+			console.log("Success", res.data);
+		} catch (error) {
+			console.error("Pages | register | handleSubmit", error);
+		}
     }
 
     return (
