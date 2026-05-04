@@ -14,11 +14,11 @@ const Login = () => {
 
                     <div className="space-y-4">
                         <div className="space-y-1.5 relative">
-                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Username</label>
+                            <label className="text-xs font-bold text-gray-500 uppercase tracking-wider ml-1">Email</label>
                             <div className="relative">
                                 <i className="ri-user-3-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                                 <input
-                                    type="text"
+                                    type="email"
                                     placeholder="Enter identifier"
                                     className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-neon-cyan focus:ring-4 focus:ring-neon-cyan/10 outline-none transition-all text-gray-700 bg-gray-50/50 focus:bg-white font-medium placeholder-gray-400"
                                 />

@@ -44,5 +44,40 @@ const registerController = asyncHandler(async (req, res) => {
   )
 })
 
+const loginController = asyncHandler(async (req, res)=>{
+  const { email, password } = req.body;
+  if([email, password].some(field => field?.trim() === "")){
+    throw new ApiError(400, "All fields are required");
+  }
 
-module.exports = { registerController };
+  const existingUser = await userModel.findOne({email})
+
+  if(!existingUser){
+    throw new ApiError(401, "User doesnt exist");
+  }
+
+  const isPasswordValid = await existingUser.isPasswordCorrect(password);
+
+  if(!isPasswordValid){
+    throw new ApiError(401, "Invalid Credentials");
+  }
+
+  const token = existingUser.generateAccessToken();
+
+  const loggedInUser = await userModel.findById(existingUser._id)
+    .select("-password");
+
+  res.cookie("token", token, {
+    httpOnly: true,     // prevents JS access (XSS protection)
+    secure: false,       // only HTTPS (set false in localhost)
+    sameSite: "strict", // CSRF protection
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+  })
+
+  return res.status(200).json(
+    new ApiResponse(200, loggedInUser, "logged in successfully")
+  )
+})
+
+
+module.exports = { registerController, loginController };
