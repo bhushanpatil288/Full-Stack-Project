@@ -1,8 +1,15 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
-import { register } from "../api/api"
+import { Link, useNavigate } from "react-router-dom"
+import { registerUser } from "../store/authThunks";
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react";
 
 const Register = () => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isLoading, userData, error } = useSelector(state => state.auth);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -16,12 +23,19 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 		try {
-			const res = await register(formData);
-			console.log("Success", res.data);
+			// const res = await register(formData);
+            dispatch(registerUser(formData));
+			// console.log("Success", res.data);
 		} catch (error) {
 			console.error("Pages | register | handleSubmit", error);
 		}
     }
+
+    useEffect(()=>{
+        if(userData){
+            navigate("/");
+        }
+    }, [userData, navigate])
 
     return (
         <div className="flex items-center justify-center h-[calc(100vh-148px)] px-4">
@@ -33,6 +47,9 @@ const Register = () => {
                         <i className="ri-user-3-line text-transparent bg-clip-text bg-linear-to-r from-neon-cyan to-neon-magenta text-3xl"></i>
                         <span>System Registration</span>
                     </div>
+
+                    {error && <p className="text-red-500 text-center">{error}</p>}
+                    {isLoading && <p className="text-blue-500 text-center">registering...</p>}
 
                     <div className="space-y-4">
                         <div className="space-y-1.5 relative">

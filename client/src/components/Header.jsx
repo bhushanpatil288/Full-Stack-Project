@@ -1,5 +1,8 @@
 import { NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/authSlice";
+import { useEffect } from "react";
 
 const navItems = [
   {
@@ -15,7 +18,14 @@ const navItems = [
 ]
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const { userData } = useSelector(state => state.auth);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+
+  }, [userData])
+  
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-void/80 backdrop-blur-lg border-b border-neon-cyan/30 shadow-[0_0_15px_rgba(0,243,255,0.15)]">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -67,7 +77,11 @@ const Header = () => {
           <button className="relative px-6 py-2 font-futuristic text-xs tracking-widest text-neon-cyan uppercase overflow-hidden group cursor-pointer">
             <div className="absolute inset-0 border border-neon-cyan/50 group-hover:border-neon-cyan transition-colors duration-300 skew-x-[-20deg]"></div>
             <div className="absolute inset-0 bg-neon-cyan/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out skew-x-[-20deg]"></div>
-            <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" onClick={() => navigate("/login")}>System_Login</span>
+            {userData ?
+              <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" onClick={() => dispatch(logout())}>Logout</span>
+              :
+              <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" onClick={() => navigate("/login")}>System_Login</span>
+            }
           </button>
         </div>
       </nav>
