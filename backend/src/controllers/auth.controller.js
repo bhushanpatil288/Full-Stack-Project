@@ -2,6 +2,8 @@ const userModel = require("../models/user.model");
 const { ApiError } = require("../utils/ApiError");
 const { ApiResponse } = require("../utils/ApiResponse");
 const asyncHandler = require("../utils/asyncHandler");
+const env_config = require("../config/env");
+const jwt = require("jsonwebtoken");
 
 const registerController = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -45,6 +47,7 @@ const registerController = asyncHandler(async (req, res) => {
 })
 
 const loginController = asyncHandler(async (req, res)=>{
+  console.log(req.cookies)
   const { email, password } = req.body;
   if([email, password].some(field => field?.trim() === "")){
     throw new ApiError(400, "All fields are required");
@@ -79,5 +82,18 @@ const loginController = asyncHandler(async (req, res)=>{
   )
 })
 
+const getCurrentUser = asyncHandler(async (req, res)=>{
+  // console.log(req.cookies, env_config.ACCESS_TOKEN_SECRET)
+  const user = await jwt.verify(req.cookies.token, env_config.ACCESS_TOKEN_SECRET);
+  const userData = await userModel.findOne({_id: user._id}).select("-password");
+  if(userData){
+    return res.status(200).json(
+      new ApiResponse(200, userData, "User data fetched successfully")
+    )
+  } else {
+    throw new ApiError(404, "user not found");
+  }
+})
 
-module.exports = { registerController, loginController };
+
+module.exports = { registerController, loginController, getCurrentUser };

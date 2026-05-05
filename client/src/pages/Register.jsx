@@ -23,9 +23,8 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 		try {
-			// const res = await register(formData);
-            dispatch(registerUser(formData));
-			// console.log("Success", res.data);
+            const res = await dispatch(registerUser(formData));
+            // console.log(res.meta.requestStatus);
 		} catch (error) {
 			console.error("Pages | register | handleSubmit", error);
 		}
