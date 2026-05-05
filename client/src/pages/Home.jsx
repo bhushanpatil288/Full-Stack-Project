@@ -1,4 +1,9 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 const Home = () => {
+  const { userData } = useSelector(state => state.auth);
+
   return (
     <div>
       <div className="flex items-center justify-center h-[calc(100vh-148px)]">
@@ -11,9 +16,12 @@ const Home = () => {
           </h1>
           <div className="space-y-4">
             <p className="text-gray-500 text-lg">Advanced authentication system</p>
-            <button className="cursor-pointer px-8 py-3 bg-linear-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              Start Session
-            </button>
+            <Link   to={userData ? "/dashboard" : "/login"} className="cursor-pointer px-8 py-3 bg-linear-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              {userData ? 
+                "Open Dashboard":
+                "Get Started"
+              }
+            </Link>
           </div>
         </div>
       </div>
