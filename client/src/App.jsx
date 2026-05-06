@@ -11,7 +11,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(()=>{
     dispatch(getCurrentUser())
-  }, [])
+  }, [dispatch])
   return (
     <Layout>
       <Routes>

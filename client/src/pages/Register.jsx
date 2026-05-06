@@ -20,10 +20,10 @@ const Register = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 		try {
-            const res = await dispatch(registerUser(formData));
+            dispatch(registerUser(formData));
             // console.log(res.meta.requestStatus);
 		} catch (error) {
 			console.error("Pages | register | handleSubmit", error);

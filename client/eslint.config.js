@@ -30,7 +30,8 @@ export default [
       ...reactHooks.configs.recommended.rules,
 
       "react/react-in-jsx-scope": "off", // React 17+
-      "no-unused-vars": "warn"
+      "no-unused-vars": "warn",
+      "react/prop-types": "off"
     }
   }
 ];
