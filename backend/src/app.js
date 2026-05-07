@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config()
+const morgan = require("morgan");
+const logger = require("./config/logger.js")
 
 const app = express();
 
@@ -13,6 +15,14 @@ app.use(cors(
     credentials: true
   }
 ))
+
+app.use(
+  morgan('dev', {
+    stream: {
+      write: (message) => logger.info(message.trim())
+    }
+  })
+);
 
 app.use(
   express.json({ limit: "16kb" })
@@ -29,9 +39,11 @@ app.use(cookieParser());
 
 const healthcheckRouter = require("./routes/healthcheck.route");
 const authRouter = require("./routes/auth.route.js");
+const tweetRouter = require("./routes/tweet.route.js");
 
 app.use("/api/v1/healthcheck", healthcheckRouter);
-app.use("/api/auth/", authRouter)
+app.use("/api/auth/", authRouter);
+app.use("/api/tweet/", tweetRouter);
 
 
 

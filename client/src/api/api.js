@@ -8,3 +8,6 @@ const api = axios.create({
 export const getCurrentUserApi = () => api.post("/auth/get-current-user");
 export const register = ( formData ) => api.post("/auth/register", formData);
 export const login = ( formData ) => api.post("/auth/login", formData);
+
+export const newTweet = ( tweetData ) => api.post("/tweet/new", tweetData);
+export const displayTweets = () => api.get("/tweet/display");

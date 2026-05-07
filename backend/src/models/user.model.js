@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const env_config = require("../config/env");
 
-const userModel = mongoose.Schema({
+const userSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -23,16 +23,16 @@ const userModel = mongoose.Schema({
   }
 });
 
-userModel.pre("save", async function(_next){
+userSchema.pre("save", async function(_next){
   if(!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10);
 })
 
-userModel.methods.isPasswordCorrect = async function(password){
+userSchema.methods.isPasswordCorrect = async function(password){
   return await bcrypt.compare(password, this.password);
 }
 
-userModel.methods.generateAccessToken = function(){
+userSchema.methods.generateAccessToken = function(){
   return jwt.sign(
     {
       _id: this._id
@@ -42,4 +42,4 @@ userModel.methods.generateAccessToken = function(){
   )
 }
 
-module.exports = mongoose.model("User", userModel);
+module.exports = mongoose.model("User", userSchema);
