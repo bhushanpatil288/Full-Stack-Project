@@ -1,13 +1,10 @@
 import { useState } from "react"
-import { useSelector } from 'react-redux'
 import { newTweet } from "../../api/api";
 
 const NewTweetForm = () => {
-  const { userData } = useSelector(state => state.auth);
   const [tweetData, setTweetData] = useState({
     title: "",
     description: "",
-    // author: userData._id
   })
 
   const handleSubmit = async (e) => {
