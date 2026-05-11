@@ -10,4 +10,4 @@ export const register = ( formData ) => api.post("/auth/register", formData);
 export const login = ( formData ) => api.post("/auth/login", formData);
 
 export const newTweet = ( tweetData ) => api.post("/tweet/new", tweetData);
-export const displayTweets = () => api.get("/tweet/display");
+export const displayAllTweets = ( limit ) => api.post("/tweet/display-all", limit);

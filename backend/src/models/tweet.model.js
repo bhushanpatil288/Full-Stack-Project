@@ -14,6 +14,6 @@ const tweetSchema = mongoose.Schema({
     ref: "User",
     required: true
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("Tweet", tweetSchema);

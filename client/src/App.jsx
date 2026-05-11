@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./store/authThunks";
 import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./components/";
 
 const App = () => {
   const dispatch = useDispatch();

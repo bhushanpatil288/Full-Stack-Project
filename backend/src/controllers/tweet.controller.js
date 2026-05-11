@@ -10,6 +10,8 @@ const newTweet = asyncHandler(async (req, res) => {
 
   const { title, description } = req.body;
 
+  console.log(description)
+
   if (!title?.trim() || !description?.trim()) {
     throw new ApiError(400, "All fields are required");
   }
@@ -42,10 +44,26 @@ const newTweet = asyncHandler(async (req, res) => {
     )
   );
 });
+
 const displayTweets = asyncHandler(async (req, res) => {
   logger.info("Display tweets request recieved");
-  console.log(req.user)
-  res.send("Tweets displayed");
-})
+  const tweets = await tweetModel.
+  find()
+  .populate({
+    path: "author",
+    select: "-password -email"
+  })
+  .sort({ _id: -1 })
+  .limit(req.body.limit);
+  console.log(req.body.limit)
+  
+  if(!tweets){
+    throw new ApiError(404, "No tweets");
+  };
+
+  res.status(200).json(
+    new ApiResponse(200, tweets, "Tweets fetched successfully")
+  );
+});
 
 module.exports = { newTweet, displayTweets };

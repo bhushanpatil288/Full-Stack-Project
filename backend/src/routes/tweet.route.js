@@ -11,7 +11,7 @@ router.route("/new").post(auth, newTweet);
 
 
 // display tweets
-router.route("/display").get(auth, displayTweets);
+router.route("/display-all").post(displayTweets);
 
 // edit tweet
 
